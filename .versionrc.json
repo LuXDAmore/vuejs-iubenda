@@ -1,0 +1,47 @@
+{
+    "types": [
+        {
+            "type": "feat",
+            "hidden": false,
+            "section": "✨ Features"
+        },
+        {
+            "type": "fix",
+            "hidden": false,
+            "section": "🐛 Bug Fixes"
+        },
+        {
+            "type": "chore",
+            "hidden": true,
+            "section": "🏡 Chores"
+        },
+        {
+            "type": "docs",
+            "hidden": true,
+            "section": "📖 Documentation"
+        },
+        {
+            "type": "style",
+            "hidden": true,
+            "section": "🎨 Styling"
+        },
+        {
+            "type": "refactor",
+            "hidden": true,
+            "section": "♻️ Code Refactoring"
+        },
+        {
+            "type": "perf",
+            "hidden": true,
+            "section": "🔥 Performance Improvements"
+        },
+        {
+            "type": "test",
+            "hidden": true,
+            "section": "✅ Testing"
+        }
+    ],
+    "commitUrlFormat": "https://github.com/LuXDAmore/vuejs-iubenda/commit/{{hash}}",
+    "compareUrlFormat": "https://github.com/LuXDAmore/vuejs-iubenda?_a=compare&oversion={{previousTag}}&mversion={{currentTag}}",
+    "issueUrlFormat": "https://github.com/LuXDAmore/vuejs-iubenda/issues/{{id}}"
+}
