@@ -1,0 +1,135 @@
+.layout {
+
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 3rem 1rem;
+    color: var( --color-text );
+    background: var( --color-background );
+
+    &--dark {
+
+        --color-background: var( --vt-c-black );
+        --color-background-soft: var( --vt-c-black-soft );
+        --color-background-mute: var( --vt-c-black-mute );
+        --color-border: var( --vt-c-divider-dark-2 );
+        --color-border-hover: var( --vt-c-divider-dark-1 );
+        --color-heading: var( --vt-c-text-dark-1 );
+        --color-text: var( --vt-c-text-dark-2 );
+
+    }
+
+    header {
+
+        max-height: 100vh;
+        line-height: 1.5;
+
+    }
+
+    .logo {
+
+        display: block;
+        margin: 0 auto 2rem;
+
+    }
+
+    nav {
+
+        width: 100%;
+        margin-top: 2rem;
+        font-size: 12px;
+        text-align: center;
+
+    }
+
+    nav a.router-link-exact-active {
+
+        color: var( --color-text );
+        font-weight: bold;
+        text-decoration: underline;
+
+    }
+
+    nav a.router-link-exact-active:hover {
+
+        background-color: transparent;
+
+    }
+
+    nav a {
+
+        display: inline-block;
+        padding: 0 1rem;
+        border-left: 1px solid var( --color-border );
+
+    }
+
+    nav a:first-of-type {
+
+        border: 0;
+    }
+
+    .theme-toggle {
+
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 8px;
+        font-size: 32px;
+        line-height: 1;
+        text-align: center;
+        background-color: transparent;
+        border: 0;
+        appearance: none;
+
+    }
+
+    @media (width >= 1024px) {
+
+        flex-direction: row;
+        padding: 0 2.5rem;
+
+        header {
+
+            display: flex;
+            place-items: center;
+
+        }
+
+        .logo {
+
+            margin: 0 2rem 0 0;
+
+        }
+
+        header .wrapper {
+
+            display: flex;
+            flex-wrap: wrap;
+            place-items: flex-start;
+
+        }
+
+        nav {
+
+            margin-top: 1rem;
+            margin-left: -1rem;
+
+            padding: 1rem 0;
+            font-size: 1rem;
+            text-align: left;
+
+        }
+
+    }
+
+}
