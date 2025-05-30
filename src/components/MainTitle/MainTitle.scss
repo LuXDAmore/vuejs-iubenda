@@ -1,0 +1,39 @@
+.main-title {
+
+    text-align: center;
+
+    h1 {
+
+        position: relative;
+        top: -10px;
+        font-weight: 500;
+        font-size: 2.6rem;
+
+    }
+
+    h3 {
+
+        font-size: 1.2rem;
+
+    }
+
+    h1,
+    h3 {
+
+        text-align: center;
+
+    }
+
+    @media (width >= 1024px) {
+
+        &,
+        h1,
+        h3 {
+
+            text-align: left;
+
+        }
+
+    }
+
+}
