@@ -18,7 +18,12 @@ export default defineConfig(
             },
         },
         plugins: [
-            vue( { include: [ /\.vue$/, /\.md$/ ], } ),
+            vue(
+                {
+                    include: [ /\.vue$/, /\.md$/ ],
+                    template: { compilerOptions: { whitespace: 'condense' } }
+                }
+            ),
             vueDevTools(),
             markdown(
                 {
@@ -31,6 +36,5 @@ export default defineConfig(
             ),
         ],
         resolve: { alias: { '@': fileURLToPath( new URL( 'src', import.meta.url ) ) }, },
-        vue: { template: { compilerOptions: { whitespace: 'condense' } } },
     }
 );
