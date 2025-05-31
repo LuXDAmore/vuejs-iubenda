@@ -84,7 +84,7 @@
 <script setup>
 
     // Vue
-    import { computed, defineProps } from 'vue';
+    import { computed } from 'vue';
 
     // Third party
     import cloneDeep from 'lodash/cloneDeep';
