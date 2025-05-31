@@ -111,6 +111,14 @@ I've followed the suggested files/folders-structure provided by the Vue Team.
 
 ---
 
-## TODO
+## Flow
+
+Navigate to the '/challenge' page, play with the form-fields and save the data when you want.
+The data is saved into the store, and the form can be saved again only after user change fields again.
+
+The user-click in the banner is also saved into the store and can be viewed in the "PiniaStore accordion [Show Pinia store state]".
+There is also a "Json accordion [Show Json]" to show how the values of the form change during user interactions.
+
+## TODO/Nice to have
 
 There's a dedicated [TODO](./TODO.md) file
