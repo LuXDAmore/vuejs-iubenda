@@ -16,12 +16,12 @@ export const useCookieFormDataStore = defineStore(
             // Methods
             , setCookieFormData = ( value = {} ) => {
 
-                cookieFormData.value = value || {};
+                cookieFormData.value = { ... value };
 
             }
             , setCookieUserAction = ( value = {} ) => {
 
-                cookieUserAction.value = value || {};
+                cookieUserAction.value = { ... value };
 
             }
         ;
