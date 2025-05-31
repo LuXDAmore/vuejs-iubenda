@@ -1,5 +1,5 @@
 // Vue
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 
 // Pinia
 import { defineStore } from 'pinia';
@@ -30,6 +30,7 @@ export const useCookieFormDataStore = defineStore(
 
             cookieFormData,
             cookieUserAction,
+
             setCookieFormData,
             setCookieUserAction,
 
