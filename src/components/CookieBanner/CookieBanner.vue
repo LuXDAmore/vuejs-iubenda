@@ -4,15 +4,23 @@
         <div class="texts">
 
             <h4
-                v-if="data.banner?.title"
+                v-if="props.data.banner?.title"
                 class="title"
-                v-text="data.banner.title"
+                v-text="props.data.banner.title"
             />
 
             <small class="cookie-text">
+
                 We and selected third parties use cookies or similar technologies for technical purposes and, with your consent, for functionality, experience, measurement and “marketing (personalized ads)” as specified in the cookie policy.<br>
                 You can freely give, deny, or withdraw your consent at any time by accessing the preferences panel. Denying consent may make related features unavailable.<br>
-                Use the “Accept” button to consent. Use the “Reject” button or close this notice to continue without accepting.
+
+                <template v-if="props.data.banner.acceptButtonDisplay">
+                    Use the “Accept” button to consent.
+                </template>
+                <template v-if="props.data.banner.rejectButtonDisplay">
+                    Use the “Reject” button or close this notice to continue without accepting.
+                </template>
+
             </small>
 
             <ul v-if="messages.length">
@@ -31,7 +39,7 @@
             <button
                 class="close-button"
                 type="button"
-                @click="() => ( data.banner.closeButtonRejects ? emit( 'reject', true ) : emit( 'accept', false ) )"
+                @click="() => ( props.data.banner.closeButtonRejects ? emit( 'reject', true ) : emit( 'accept', false ) )"
             >
                 &#215;
             </button>
@@ -41,10 +49,10 @@
         <div class="actions">
 
             <button
-                v-if="data.banner?.closeButtonDisplay"
+                v-if="props.data.banner?.closeButtonDisplay"
                 class="action-button background--default"
                 type="button"
-                @click="() => ( data.banner.closeButtonRejects ? emit( 'reject', true ) : emit( 'accept', false ) )"
+                @click="() => ( props.data.banner.closeButtonRejects ? emit( 'reject', true ) : emit( 'accept', false ) )"
             >
                 Close
             </button>
@@ -52,7 +60,7 @@
             <span class="spacer" />
 
             <button
-                v-if="data.banner?.rejectButtonDisplay"
+                v-if="props.data.banner?.rejectButtonDisplay"
                 class="action-button"
                 type="button"
                 @click="() => emit( 'reject', true )"
@@ -60,7 +68,7 @@
                 Reject
             </button>
             <button
-                v-if="data.banner?.acceptButtonDisplay"
+                v-if="props.data.banner?.acceptButtonDisplay"
                 class="action-button"
                 type="button"
                 @click="() => emit( 'accept', true )"
@@ -78,6 +86,9 @@
     // Vue
     import { computed, defineProps } from 'vue';
 
+    // Third party
+    import cloneDeep from 'lodash/cloneDeep';
+
     // Constants
     import { CONFIGURATION_DEFAULT } from '@/constants/configuration';
 
@@ -88,14 +99,12 @@
             {
                 data: {
                     type: Object,
-                    default: () => ( { ... CONFIGURATION_DEFAULT } ),
+                    default: () => ( cloneDeep( CONFIGURATION_DEFAULT ) ),
                 },
             }
         )
         // Emits
-        , emit = defineEmits(
-            [ 'accept', 'reject' ]
-        )
+        , emit = defineEmits( [ 'accept', 'reject' ] )
         // Checks
         , isTargetCountryEuOrWorld = computed( () => ( props.data.targetCountries === 'EU' || props.data.targetCountries === 'world' ) )
         , isCompliantWithItalianLaw = computed(
