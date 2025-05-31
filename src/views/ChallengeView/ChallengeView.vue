@@ -10,10 +10,11 @@
             autocomplete="off"
             method="post"
             novalidate
-            @keydown.prevent.enter="() => onFormSubmitted()"
-            @keypress.prevent.enter="() => onFormSubmitted()"
-            @keyup.prevent.enter="() => onFormSubmitted()"
-            @submit.prevent="() => onFormSubmitted()"
+            @keydown.prevent.enter="() => onFormSubmit()"
+            @keypress.prevent.enter="() => onFormSubmit()"
+            @keyup.prevent.enter="() => onFormSubmit()"
+            @reset.prevent="() => onFormReset()"
+            @submit.prevent="() => onFormSubmit()"
         >
 
             <fieldset :disabled="loading">
@@ -202,6 +203,15 @@
             <div class="field-submit__container">
 
                 <button
+                    v-if="! isFormDataEqual"
+                    class="field-submit"
+                    :disabled="loading"
+                    type="reset"
+                >
+                    Reset
+                </button>
+
+                <button
                     class="field-submit"
                     :disabled="loading || isFormDataEqual"
                     type="submit"
@@ -211,11 +221,19 @@
 
                 <span v-if="loading" class="loading-indicator" />
 
+                <small v-if="event.name">
+                    {{ event.name }}: {{ event.value }}
+                </small>
+
             </div>
 
         </form>
 
-        <cookie-banner :data="data" />
+        <cookie-banner
+            :data="data"
+            @accept="onCookieAccept"
+            @reject="onCookieReject"
+        />
 
         <details>
             <summary>Show Json</summary>
@@ -251,10 +269,26 @@
         data = ref( cloneDeep( CONFIGURATION_DEFAULT ) )
         , prettifiedJsonToShowInUi = computed( () => JSON.stringify( data.value, null, 2 ) )
         // UI
+        , event = ref(
+            {
+                name: '',
+                value: '',
+            }
+        )
         , loading = ref( false )
         , isFormDataEqual = computed( () => isEqual( CONFIGURATION_DEFAULT, data.value ) )
         // Events
-        , onFormSubmitted = async() => {
+        , onFormReset = () => {
+
+            data.value = cloneDeep( CONFIGURATION_DEFAULT );
+
+            event.value = {
+                name: '',
+                value: '',
+            };
+
+        }
+        , onFormSubmit = async() => {
 
             if( loading.value )
                 return;
@@ -266,6 +300,22 @@
             await timeout( 2500 );
 
             loading.value = false; // eslint-disable-line require-atomic-updates
+
+        }
+        , onCookieAccept = value => {
+
+            console.info( 'cookie-accepted', value );
+
+            event.value.name = 'accepted';
+            event.value.value = value;
+
+        }
+        , onCookieReject = value => {
+
+            console.info( 'cookie-rejected', value );
+
+            event.value.name = 'rejected';
+            event.value.value = value;
 
         }
     ;
