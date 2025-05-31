@@ -200,15 +200,17 @@
             <hr>
 
             <div class="field-submit__container">
+
                 <button
                     class="field-submit"
-                    :disabled="loading"
+                    :disabled="loading || isFormDataEqual"
                     type="submit"
                 >
                     Save
                 </button>
 
                 <span v-if="loading" class="loading-indicator" />
+
             </div>
 
         </form>
@@ -230,6 +232,10 @@
     // Vue
     import { computed, ref } from 'vue';
 
+    // Third party
+    import cloneDeep from 'lodash/cloneDeep';
+    import isEqual from 'lodash/isEqual';
+
     // Components
     import CookieBanner from '@/components/CookieBanner/CookieBanner.vue';
 
@@ -242,10 +248,11 @@
     // Setup
     const
         // Configuration
-        data = ref( CONFIGURATION_DEFAULT )
+        data = ref( cloneDeep( CONFIGURATION_DEFAULT ) )
         , prettifiedJsonToShowInUi = computed( () => JSON.stringify( data.value, null, 2 ) )
         // UI
         , loading = ref( false )
+        , isFormDataEqual = computed( () => isEqual( CONFIGURATION_DEFAULT, data.value ) )
         // Events
         , onFormSubmitted = async() => {
 
@@ -256,7 +263,7 @@
 
             console.info( 'Form data', data.value );
 
-            await timeout( 3000 );
+            await timeout( 2500 );
 
             loading.value = false; // eslint-disable-line require-atomic-updates
 
