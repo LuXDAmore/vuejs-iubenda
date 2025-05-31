@@ -47,6 +47,7 @@
         "dev": "vite --open",
         "build": "vite build",
         "preview": "vite preview",
+        "publish": "pnpm lint:fix && pnpm test && pnpm build",
         "test:unit": "vitest",
         "test:e2e": "playwright test",
         "postinstall": "playwright install"
