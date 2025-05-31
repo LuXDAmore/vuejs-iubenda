@@ -8,5 +8,7 @@
 - Add a message if the user is Offline, so he knows he cannot save the form;
 - Add extra github actions;
 - Add more tests (unit+e2e);
+- Possibly, change "lodash/cloneDeep" with "JSON.parse( JSON.stringify() )";
+- Possibly, change "lodash/isEqual" with "sorting object keys and JSON.stringify()";
 - As suggested by Renovate (github action), upgrade "eslint-plugin-eslint-comments" to the new eslint module "@eslint-community/eslint-plugin-eslint-comments" is a nice to have
 
