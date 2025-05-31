@@ -221,8 +221,8 @@
 
                 <span v-if="loading" class="loading-indicator" />
 
-                <small v-if="event.name">
-                    {{ event.name }}: {{ event.value }}
+                <small v-if="userAction.name">
+                    {{ userAction.name }}: {{ userAction.value }}
                 </small>
 
             </div>
@@ -265,11 +265,13 @@
 
     // Setup
     const
+        // Emits
+        emit = defineEmits( [ 'reset', 'submit' ] )
         // Configuration
-        data = ref( cloneDeep( CONFIGURATION_DEFAULT ) )
+        , data = ref( cloneDeep( CONFIGURATION_DEFAULT ) )
         , prettifiedJsonToShowInUi = computed( () => JSON.stringify( data.value, null, 2 ) )
         // UI
-        , event = ref(
+        , userAction = ref(
             {
                 name: '',
                 value: '',
@@ -282,40 +284,44 @@
 
             data.value = cloneDeep( CONFIGURATION_DEFAULT );
 
-            event.value = {
+            userAction.value = {
                 name: '',
                 value: '',
             };
 
+            emit( 'reset', data.value );
+
         }
         , onFormSubmit = async() => {
+
+            console.info( 'Form data', data.value );
 
             if( loading.value )
                 return;
 
             loading.value = true;
 
-            console.info( 'Form data', data.value );
-
             await timeout( 2500 );
 
             loading.value = false; // eslint-disable-line require-atomic-updates
+
+            emit( 'submit', data.value );
 
         }
         , onCookieAccept = value => {
 
             console.info( 'cookie-accepted', value );
 
-            event.value.name = 'accepted';
-            event.value.value = value;
+            userAction.value.name = 'accepted';
+            userAction.value.value = value;
 
         }
         , onCookieReject = value => {
 
             console.info( 'cookie-rejected', value );
 
-            event.value.name = 'rejected';
-            event.value.value = value;
+            userAction.value.name = 'rejected';
+            userAction.value.value = value;
 
         }
     ;
