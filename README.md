@@ -4,7 +4,7 @@
 
 ```bash
 
-    pnpm install # or, yarn install
+    pnpm install # or, yarn install, or npm install
 
 ```
 
@@ -15,15 +15,17 @@ You're done.
 ```bash
 
     # Develop
-    pnpm dev # Dev mode
-    pnpm build #Build the project
+    pnpm dev # dev mode
+    pnpm build # build the project
+    pnpm preview # preview the project
 
     # Test
-    pnpm test:unit # Unit
+    pnpm test:unit # unit
     pnpm test:e2e # e2e
+    pnpm test # run all the previous tests
 
     # Miscellaneous
-    pnpm lint:fix # Lint all the files in the project at once (css,scss,js,ts,html)
+    pnpm lint:fix # lint all the files in the project at once (css,scss,js,ts,html)
 
 ```
 
