@@ -178,6 +178,21 @@
 
     }
 
+    .message {
+
+        &--error {
+
+            color: var( --vt-c-error );
+
+        }
+        &--success {
+
+            color: var( --vt-c-success );
+
+        }
+
+    }
+
     @keyframes rotation {
         0% {
 
