@@ -122,3 +122,8 @@ There is also a "Json accordion [Show Json]" to show how the values of the form 
 ## TODO/Nice to have
 
 There's a dedicated [TODO](./TODO.md) file
+
+
+## Time
+
+Total time dedicated to the project: ~ 6.5 hours
