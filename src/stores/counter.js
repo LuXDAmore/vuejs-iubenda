@@ -20,9 +20,11 @@ export const useCounterStore = defineStore(
         }
 
         return {
+
             count,
             doubleCount,
-            increment
+            increment,
+
         };
 
     }
