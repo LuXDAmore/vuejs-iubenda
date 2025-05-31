@@ -225,6 +225,18 @@
                     {{ userAction.name }}: {{ userAction.value }}
                 </small>
 
+                <span class="spacer" />
+
+                <em
+                    v-if="isDataSentToServer"
+                    class="message"
+                    :class="{
+                        'message--success': isDataSentToServerSimulateSuccess,
+                        'message--error': ! isDataSentToServerSimulateSuccess,
+                    }"
+                    v-text="simulatedServerMessage"
+                />
+
             </div>
 
         </form>
@@ -265,6 +277,7 @@
     import { storeToRefs } from 'pinia';
 
     // Third party
+    import { updatedDiff } from 'deep-object-diff';
     import cloneDeep from 'lodash/cloneDeep';
     import isEqual from 'lodash/isEqual';
 
@@ -313,6 +326,8 @@
         // Events
         , onFormReset = () => {
 
+            isDataSentToServer.value = false;
+
             data.value = cloneDeep( CONFIGURATION_DEFAULT );
 
             userAction.value = {
@@ -329,6 +344,7 @@
         , onFormSubmit = async() => {
 
             console.info( 'Form data', data.value );
+            console.info( 'Form data [diff]', diffKeysFromDefaultConfig.value );
 
             if( loading.value )
                 return;
@@ -342,6 +358,12 @@
             loading.value = false; // eslint-disable-line require-atomic-updates
 
             emit( 'submit', data.value );
+
+            // ?: RANDOM Simulate answer from a server
+            isDataSentToServer.value = true;
+
+            isDataSentToServerSimulateSuccess.value = Math.random() < 0.6; // ~60% probability of getting true
+            simulatedServerMessage.value = isDataSentToServerSimulateSuccess.value ? 'Message correctly sent to the server! (random message)' : 'An error has occurred! (random message)';
 
         }
         , onCookieAccept = value => {
@@ -364,6 +386,12 @@
             setCookieUserAction( userAction.value );
 
         }
+        // Extra
+        , diffKeysFromDefaultConfig = computed( () => updatedDiff( CONFIGURATION_DEFAULT, data.value ) )
+        // Server form Messages
+        , isDataSentToServer = ref( false )
+        , isDataSentToServerSimulateSuccess = ref( true )
+        , simulatedServerMessage = ref( '' )
     ;
 
 </script>
