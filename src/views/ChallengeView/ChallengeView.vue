@@ -245,7 +245,7 @@
             </details>
 
             <details>
-                <summary>Show Pinia Store</summary>
+                <summary>Show Pinia store state</summary>
                 <code>
                     <pre v-text="prettifiedJsonFromStoreCookieFormDataToShowInUi" />
                 </code>
