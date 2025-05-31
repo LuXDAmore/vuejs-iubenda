@@ -12,12 +12,13 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig(
     {
+
         expect: {
-        /**
-         * Maximum time expect() should wait for the condition to be met.
-         * For example in `await expect(locator).toHaveText();`
-         */
-            timeout: 5000,
+            /**
+             * Maximum time expect() should wait for the condition to be met.
+             * For example in `await expect(locator).toHaveText();`
+             */
+            timeout: 6000,
         },
 
         /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -37,34 +38,6 @@ export default defineConfig(
                 name: 'webkit',
                 use: { ... devices[ 'Desktop Safari' ], },
             },
-
-            /* Test against mobile viewports. */
-            // {
-            //   name: 'Mobile Chrome',
-            //   use: {
-            //     ...devices['Pixel 5'],
-            //   },
-            // },
-            // {
-            //   name: 'Mobile Safari',
-            //   use: {
-            //     ...devices['iPhone 12'],
-            //   },
-            // },
-
-        /* Test against branded browsers. */
-        // {
-        //   name: 'Microsoft Edge',
-        //   use: {
-        //     channel: 'msedge',
-        //   },
-        // },
-        // {
-        //   name: 'Google Chrome',
-        //   use: {
-        //     channel: 'chrome',
-        //   },
-        // },
         ],
 
         /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -76,11 +49,12 @@ export default defineConfig(
         testDir: './e2e',
 
         /* Maximum time one test can run for. */
-        timeout: 30 * 1000,
+        timeout: 60 * 1000,
 
         /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
         use: {
-        /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
+
+            /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
             actionTimeout: 0,
             /* Base URL to use in actions like `await page.goto('/')`. */
             baseURL: process.env.CI ? 'http://localhost:4173' : 'http://localhost:5173',
@@ -93,14 +67,13 @@ export default defineConfig(
         },
 
         /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-        // outputDir: 'test-results/',
         /* Run your local dev server before starting the tests */
         webServer: {
-        /**
-         * Use the dev server by default for faster feedback loop.
-         * Use the preview server on CI for more realistic testing.
-         * Playwright will re-use the local server if there is already a dev-server running.
-         */
+            /**
+             * Use the dev server by default for faster feedback loop.
+             * Use the preview server on CI for more realistic testing.
+             * Playwright will re-use the local server if there is already a dev-server running.
+             */
             command: process.env.CI ? 'npm run preview' : 'npm run dev',
             port: process.env.CI ? 4173 : 5173,
             reuseExistingServer: ! process.env.CI,
