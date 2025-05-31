@@ -1,5 +1,5 @@
 <template>
-    <div class="cookie-banner">
+    <div class="cookie-banner" :class="classes">
 
         <div class="texts">
 
@@ -22,28 +22,39 @@
                 You're compliant with the rulez.
             </h6>
 
+            <button
+                class="close-button"
+                type="button"
+                @click="() => ( data.banner.closeButtonRejects ? emit( 'reject', true ) : emit( 'accept', false ) )"
+            >
+                &#215;
+            </button>
+
         </div>
 
         <div class="actions">
 
             <button
                 v-if="data.banner?.acceptButtonDisplay"
+                class="action-button"
                 type="button"
-                @click="emit( 'accept' )"
+                @click="() => emit( 'accept', true )"
             >
                 Accept
             </button>
             <button
                 v-if="data.banner?.closeButtonDisplay"
+                class="action-button"
                 type="button"
-                @click="emit( 'close', data.banner.closeButtonRejects )"
+                @click="() => ( data.banner.closeButtonRejects ? emit( 'reject', true ) : emit( 'accept', false ) )"
             >
                 Close
             </button>
             <button
                 v-if="data.banner?.rejectButtonDisplay"
+                class="action-button"
                 type="button"
-                @click="emit( 'reject' )"
+                @click="() => emit( 'reject', true )"
             >
                 Reject
             </button>
@@ -74,11 +85,7 @@
         )
         // Emits
         , emit = defineEmits(
-            [
-                'accept',
-                'close',
-                'reject',
-            ]
+            [ 'accept', 'reject' ]
         )
         // Checks
         , isTargetCountryEuOrWorld = computed( () => ( props.data.targetCountries === 'EU' || props.data.targetCountries === 'world' ) )
@@ -137,6 +144,15 @@
                 return messages;
 
             }
+        )
+        , isCookieBannerCompliant = computed( () => ! messages.value.length )
+        , classes = computed(
+            () => (
+                {
+                    'cookie-banner--compliant': isCookieBannerCompliant.value,
+                    'cookie-banner--error': ! isCookieBannerCompliant.value,
+                }
+            )
         )
     ;
 
