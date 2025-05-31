@@ -33,6 +33,12 @@ a,
 
 }
 
+.spacer {
+
+    flex: 1;
+
+}
+
 @media (hover: hover) {
     a:hover {
 
