@@ -87,6 +87,12 @@ li {
 
 }
 
+pre {
+
+    overflow: auto;
+
+}
+
 * {
 
     transition: all .3s linear;
