@@ -8,3 +8,5 @@
 - Add a message if the user is Offline, so he knows he cannot save the form;
 - Add extra github actions;
 - Add more tests (unit+e2e);
+- As suggested by Renovate (github action), upgrade "eslint-plugin-eslint-comments" to the new eslint module "@eslint-community/eslint-plugin-eslint-comments" is a nice to have
+
