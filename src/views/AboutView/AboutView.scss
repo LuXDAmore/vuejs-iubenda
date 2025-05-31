@@ -1,9 +1,9 @@
-@media (width >= 1024px) {
-    .about-view {
+.about-view {
 
-        display: flex;
-        align-items: center;
-        min-height: 100vh;
+    display: flex;
+    flex-direction: column nowrap;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 
-    }
 }
