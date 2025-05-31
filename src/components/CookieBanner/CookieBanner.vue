@@ -36,7 +36,7 @@
             <button
                 v-if="data.banner?.closeButtonDisplay"
                 type="button"
-                @click="emit( 'close' )"
+                @click="emit( 'close', data.banner.closeButtonRejects )"
             >
                 Close
             </button>
