@@ -238,7 +238,14 @@
         <details>
             <summary>Show Json</summary>
             <code>
-                <pre v-text="prettifiedJsonToShowInUi" />
+                <pre v-text="prettifiedJsonFromDataToShowInUi" />
+            </code>
+        </details>
+
+        <details>
+            <summary>Show Pinia Store</summary>
+            <code>
+                <pre v-text="prettifiedJsonFromStoreCookieFormDataToShowInUi" />
             </code>
         </details>
 
@@ -250,9 +257,15 @@
     // Vue
     import { computed, ref } from 'vue';
 
+    // Pinia
+    import { storeToRefs } from 'pinia';
+
     // Third party
     import cloneDeep from 'lodash/cloneDeep';
     import isEqual from 'lodash/isEqual';
+
+    // Store
+    import { useCookieFormDataStore } from '@/stores/cookie-form-data';
 
     // Components
     import CookieBanner from '@/components/CookieBanner/CookieBanner.vue';
@@ -269,16 +282,30 @@
         emit = defineEmits( [ 'reset', 'submit' ] )
         // Configuration
         , data = ref( cloneDeep( CONFIGURATION_DEFAULT ) )
-        , prettifiedJsonToShowInUi = computed( () => JSON.stringify( data.value, null, 2 ) )
-        // UI
         , userAction = ref(
             {
                 name: '',
                 value: '',
             }
         )
+        // Store
+        , cookieFormDataStore = useCookieFormDataStore()
+        , { setCookieFormData, setCookieUserAction } = cookieFormDataStore
+        , { cookieFormData, cookieUserAction } = storeToRefs( cookieFormDataStore )
+        // UI
         , loading = ref( false )
         , isFormDataEqual = computed( () => isEqual( CONFIGURATION_DEFAULT, data.value ) )
+        , prettifiedJsonFromDataToShowInUi = computed( () => JSON.stringify( data.value, null, 2 ) )
+        , prettifiedJsonFromStoreCookieFormDataToShowInUi = computed(
+            () => JSON.stringify(
+                {
+                    'cookie-form-data': cookieFormData.value,
+                    'cookie-user-action': cookieUserAction.value,
+                },
+                null,
+                2
+            )
+        )
         // Events
         , onFormReset = () => {
 
@@ -288,6 +315,9 @@
                 name: '',
                 value: '',
             };
+
+            setCookieFormData( data.value );
+            setCookieUserAction( userAction.value );
 
             emit( 'reset', data.value );
 
@@ -301,7 +331,9 @@
 
             loading.value = true;
 
-            await timeout( 2500 );
+            await timeout( 2500 ); // ?: Server fetch maybe
+
+            setCookieFormData( data.value );
 
             loading.value = false; // eslint-disable-line require-atomic-updates
 
@@ -315,6 +347,8 @@
             userAction.value.name = 'accepted';
             userAction.value.value = value;
 
+            setCookieUserAction( userAction.value );
+
         }
         , onCookieReject = value => {
 
@@ -322,6 +356,8 @@
 
             userAction.value.name = 'rejected';
             userAction.value.value = value;
+
+            setCookieUserAction( userAction.value );
 
         }
     ;
