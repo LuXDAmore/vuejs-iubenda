@@ -9,7 +9,7 @@
     --vt-c-black-mute: #282828;
     --vt-c-indigo: #2C3E50;
     --vt-c-error: #C23616;
-    --vt-c-success: #44BD32;
+    --vt-c-success: hsl( 160deg 100% 37% / 100% );
     --vt-c-divider-light-1: rgb( 60 60 60 / 29% );
     --vt-c-divider-light-2: rgb( 60 60 60 / 12% );
     --vt-c-divider-dark-1: rgb( 84 84 84 / 65% );
@@ -25,6 +25,7 @@
     --color-border-hover: var( --vt-c-divider-light-1 );
     --color-heading: var( --vt-c-text-light-1 );
     --color-text: var( --vt-c-text-light-1 );
+    --color-green: var( --vt-c-success );
     --section-gap: 160px;
 
 }
