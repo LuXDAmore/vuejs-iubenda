@@ -235,19 +235,23 @@
             @reject="onCookieReject"
         />
 
-        <details>
-            <summary>Show Json</summary>
-            <code>
-                <pre v-text="prettifiedJsonFromDataToShowInUi" />
-            </code>
-        </details>
+        <div class="json-container">
 
-        <details>
-            <summary>Show Pinia Store</summary>
-            <code>
-                <pre v-text="prettifiedJsonFromStoreCookieFormDataToShowInUi" />
-            </code>
-        </details>
+            <details>
+                <summary>Show Json</summary>
+                <code>
+                    <pre v-text="prettifiedJsonFromDataToShowInUi" />
+                </code>
+            </details>
+
+            <details>
+                <summary>Show Pinia Store</summary>
+                <code>
+                    <pre v-text="prettifiedJsonFromStoreCookieFormDataToShowInUi" />
+                </code>
+            </details>
+
+        </div>
 
     </section>
 </template>
@@ -294,7 +298,7 @@
         , { cookieFormData, cookieUserAction } = storeToRefs( cookieFormDataStore )
         // UI
         , loading = ref( false )
-        , isFormDataEqual = computed( () => isEqual( CONFIGURATION_DEFAULT, data.value ) )
+        , isFormDataEqual = computed( () => isEqual( cookieFormData.value, data.value ) )
         , prettifiedJsonFromDataToShowInUi = computed( () => JSON.stringify( data.value, null, 2 ) )
         , prettifiedJsonFromStoreCookieFormDataToShowInUi = computed(
             () => JSON.stringify(
