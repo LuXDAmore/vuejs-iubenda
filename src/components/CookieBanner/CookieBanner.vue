@@ -9,6 +9,12 @@
                 v-text="data.banner.title"
             />
 
+            <small class="cookie-text">
+                We and selected third parties use cookies or similar technologies for technical purposes and, with your consent, for functionality, experience, measurement and “marketing (personalized ads)” as specified in the cookie policy.<br>
+                You can freely give, deny, or withdraw your consent at any time by accessing the preferences panel. Denying consent may make related features unavailable.<br>
+                Use the “Accept” button to consent. Use the “Reject” button or close this notice to continue without accepting.
+            </small>
+
             <ul v-if="messages.length">
                 <li v-for="message in messages" :key="message">
                     <h6
@@ -35,21 +41,16 @@
         <div class="actions">
 
             <button
-                v-if="data.banner?.acceptButtonDisplay"
-                class="action-button"
-                type="button"
-                @click="() => emit( 'accept', true )"
-            >
-                Accept
-            </button>
-            <button
                 v-if="data.banner?.closeButtonDisplay"
-                class="action-button"
+                class="action-button background--default"
                 type="button"
                 @click="() => ( data.banner.closeButtonRejects ? emit( 'reject', true ) : emit( 'accept', false ) )"
             >
                 Close
             </button>
+
+            <span class="spacer" />
+
             <button
                 v-if="data.banner?.rejectButtonDisplay"
                 class="action-button"
@@ -57,6 +58,14 @@
                 @click="() => emit( 'reject', true )"
             >
                 Reject
+            </button>
+            <button
+                v-if="data.banner?.acceptButtonDisplay"
+                class="action-button"
+                type="button"
+                @click="() => emit( 'accept', true )"
+            >
+                Accept
             </button>
 
         </div>
