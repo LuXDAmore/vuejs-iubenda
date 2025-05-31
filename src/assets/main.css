@@ -27,6 +27,12 @@ a,
 
 }
 
+.background--default {
+
+    background-color: var( --color-background ) !important;
+
+}
+
 @media (hover: hover) {
     a:hover {
 
@@ -52,7 +58,7 @@ a,
 
     #app main {
 
-        max-height: 90vh;
+        max-height: 99vh;
         overflow-y: auto;
 
     }
