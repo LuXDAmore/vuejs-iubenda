@@ -16,7 +16,7 @@
             @submit.prevent="() => onFormSubmitted()"
         >
 
-            <fieldset>
+            <fieldset :disabled="loading">
                 <h5 class="field-title">
                     Target countries
                 </h5>
@@ -62,7 +62,7 @@
 
             </fieldset>
 
-            <fieldset>
+            <fieldset :disabled="loading">
 
                 <h5 class="field-title">
                     Legislation
@@ -95,7 +95,7 @@
 
             </fieldset>
 
-            <fieldset>
+            <fieldset :disabled="loading">
 
                 <h5 class="field-title">
                     Consent
@@ -129,7 +129,7 @@
 
             <hr>
 
-            <fieldset class="field-container__banner">
+            <fieldset class="field-container__banner" :disabled="loading">
 
                 <h5 class="field-title">
                     Banner
@@ -199,9 +199,17 @@
 
             <hr>
 
-            <button class="field-submit" type="submit">
-                Save
-            </button>
+            <div class="field-submit__container">
+                <button
+                    class="field-submit"
+                    :disabled="loading"
+                    type="submit"
+                >
+                    Save
+                </button>
+
+                <span v-if="loading" class="loading-indicator" />
+            </div>
 
         </form>
 
@@ -228,15 +236,29 @@
     // Constants
     import { CONFIGURATION_DEFAULT } from '@/constants/configuration';
 
+    // Utils
+    import { timeout } from '@/utils/timer';
+
     // Setup
     const
         // Configuration
         data = ref( CONFIGURATION_DEFAULT )
         , prettifiedJsonToShowInUi = computed( () => JSON.stringify( data.value, null, 2 ) )
+        // UI
+        , loading = ref( false )
         // Events
-        , onFormSubmitted = () => {
+        , onFormSubmitted = async() => {
 
-            console.info( data.value );
+            if( loading.value )
+                return;
+
+            loading.value = true;
+
+            console.info( 'Form data', data.value );
+
+            await timeout( 3000 );
+
+            loading.value = false; // eslint-disable-line require-atomic-updates
 
         }
     ;
