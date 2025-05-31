@@ -4,6 +4,9 @@ import { ref } from 'vue';
 // Pinia
 import { defineStore } from 'pinia';
 
+// Third party
+import cloneDeep from 'lodash/cloneDeep';
+
 // Store
 export const useCookieFormDataStore = defineStore(
     'cookieFormData',
@@ -16,12 +19,12 @@ export const useCookieFormDataStore = defineStore(
             // Methods
             , setCookieFormData = ( value = {} ) => {
 
-                cookieFormData.value = { ... value };
+                cookieFormData.value = cloneDeep( value );
 
             }
             , setCookieUserAction = ( value = {} ) => {
 
-                cookieUserAction.value = { ... value };
+                cookieUserAction.value = cloneDeep( value );
 
             }
         ;
