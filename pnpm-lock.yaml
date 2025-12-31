@@ -190,8 +190,8 @@ importers:
         specifier: ^12.1.0
         version: 12.1.0(postcss@8.5.4)(stylelint@16.20.0(typescript@5.8.3))
       stylelint-config-standard:
-        specifier: ^38.0.0
-        version: 38.0.0(stylelint@16.20.0(typescript@5.8.3))
+        specifier: ^39.0.1
+        version: 39.0.1(stylelint@16.20.0(typescript@5.8.3))
       stylelint-config-standard-scss:
         specifier: ^15.0.1
         version: 15.0.1(postcss@8.5.4)(stylelint@16.20.0(typescript@5.8.3))
@@ -5170,6 +5170,12 @@ packages:
     peerDependencies:
       stylelint: ^16.16.0
 
+  stylelint-config-recommended@17.0.0:
+    resolution: {integrity: sha512-WaMSdEiPfZTSFVoYmJbxorJfA610O0tlYuU2aEwY33UQhSPgFbClrVJYWvy3jGJx+XW37O+LyNLiZOEXhKhJmA==}
+    engines: {node: '>=18.12.0'}
+    peerDependencies:
+      stylelint: ^16.23.0
+
   stylelint-config-sass-guidelines@12.1.0:
     resolution: {integrity: sha512-NTxEtVT6uNSqRvq+A3ScyKhjUrY/Z845TnpWEwnMgIPZ/+/Waa4+51r6OPuQRMu4XZS3D8DK1UaT4TWFBvuuAw==}
     engines: {node: '>=18.12.0'}
@@ -5192,6 +5198,12 @@ packages:
     engines: {node: '>=18.12.0'}
     peerDependencies:
       stylelint: ^16.18.0
+
+  stylelint-config-standard@39.0.1:
+    resolution: {integrity: sha512-b7Fja59EYHRNOTa3aXiuWnhUWXFU2Nfg6h61bLfAb5GS5fX3LMUD0U5t4S8N/4tpHQg3Acs2UVPR9jy2l1g/3A==}
+    engines: {node: '>=18.12.0'}
+    peerDependencies:
+      stylelint: ^16.23.0
 
   stylelint-no-unsupported-browser-features@8.0.4:
     resolution: {integrity: sha512-MNdjegsgfTu1iDBsJM+1uBVZsIt0EWzqAX5qgUBAGavXkddwRqh+S1KD2VnWqUhiEuyddVrWJH8vKsNI40orxA==}
@@ -5837,10 +5849,12 @@ packages:
   whatwg-encoding@2.0.0:
     resolution: {integrity: sha512-p41ogyeMUrw3jWclHWTQg1k05DSVXPLcVxRTYsXUk+ZooOCZLcoYgPZ/HL/D/N+uQPOtcp1me1WhBEaX02mhWg==}
     engines: {node: '>=12'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@3.0.0:
     resolution: {integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q==}
@@ -11426,6 +11440,10 @@ snapshots:
     dependencies:
       stylelint: 16.20.0(typescript@5.8.3)
 
+  stylelint-config-recommended@17.0.0(stylelint@16.20.0(typescript@5.8.3)):
+    dependencies:
+      stylelint: 16.20.0(typescript@5.8.3)
+
   stylelint-config-sass-guidelines@12.1.0(postcss@8.5.4)(stylelint@16.20.0(typescript@5.8.3)):
     dependencies:
       '@stylistic/stylelint-plugin': 3.1.2(stylelint@16.20.0(typescript@5.8.3))
@@ -11446,6 +11464,11 @@ snapshots:
     dependencies:
       stylelint: 16.20.0(typescript@5.8.3)
       stylelint-config-recommended: 16.0.0(stylelint@16.20.0(typescript@5.8.3))
+
+  stylelint-config-standard@39.0.1(stylelint@16.20.0(typescript@5.8.3)):
+    dependencies:
+      stylelint: 16.20.0(typescript@5.8.3)
+      stylelint-config-recommended: 17.0.0(stylelint@16.20.0(typescript@5.8.3))
 
   stylelint-no-unsupported-browser-features@8.0.4(stylelint@16.20.0(typescript@5.8.3)):
     dependencies:
