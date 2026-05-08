@@ -63,7 +63,7 @@
     "devDependencies": {
         "md-powerpack": "^1.0.3",
         "@babel/eslint-parser": "^7.27.1",
-        "@eslint/compat": "^1.2.9",
+        "@eslint/compat": "^2.1.0",
         "@eslint/eslintrc": "^3.3.1",
         "@eslint/js": "^9.28.0",
         "@nuxt/eslint": "^1.4.1",
